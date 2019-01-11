@@ -15,6 +15,7 @@
 		DB0EED4C21E5A1C900ABAA53 /* AccessorizeMeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0EED4B21E5A1C900ABAA53 /* AccessorizeMeTests.swift */; };
 		DB0EED5721E5A1C900ABAA53 /* AccessorizeMeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0EED5621E5A1C900ABAA53 /* AccessorizeMeUITests.swift */; };
 		DB45C0F721E80741008F20C9 /* AccessoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB45C0F621E80741008F20C9 /* AccessoryCollectionViewCell.swift */; };
+		DB45C0FB21E84189008F20C9 /* sun-glasses.png in Resources */ = {isa = PBXBuildFile; fileRef = DB45C0FA21E84189008F20C9 /* sun-glasses.png */; };
 		DB89984621E73D310055F0D6 /* AccessoryArtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB89984521E73D310055F0D6 /* AccessoryArtView.swift */; };
 /* End PBXBuildFile section */
 
@@ -50,6 +51,7 @@
 		DB0EED5621E5A1C900ABAA53 /* AccessorizeMeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessorizeMeUITests.swift; sourceTree = "<group>"; };
 		DB0EED5821E5A1C900ABAA53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DB45C0F621E80741008F20C9 /* AccessoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessoryCollectionViewCell.swift; sourceTree = "<group>"; };
+		DB45C0FA21E84189008F20C9 /* sun-glasses.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "sun-glasses.png"; path = "../../../../Downloads/sun-glasses.png"; sourceTree = "<group>"; };
 		DB89984521E73D310055F0D6 /* AccessoryArtView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessoryArtView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -101,6 +103,7 @@
 		DB0EED3521E5A1C400ABAA53 /* AccessorizeMe */ = {
 			isa = PBXGroup;
 			children = (
+				DB45C0F921E8416F008F20C9 /* accessories */,
 				DB89984521E73D310055F0D6 /* AccessoryArtView.swift */,
 				DB0EED3621E5A1C400ABAA53 /* AppDelegate.swift */,
 				DB0EED3821E5A1C400ABAA53 /* AccessoryArtViewController.swift */,
@@ -129,6 +132,15 @@
 				DB0EED5821E5A1C900ABAA53 /* Info.plist */,
 			);
 			path = AccessorizeMeUITests;
+			sourceTree = "<group>";
+		};
+		DB45C0F921E8416F008F20C9 /* accessories */ = {
+			isa = PBXGroup;
+			children = (
+				DB45C0FA21E84189008F20C9 /* sun-glasses.png */,
+			);
+			name = accessories;
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -238,6 +250,7 @@
 				DB0EED4121E5A1C900ABAA53 /* LaunchScreen.storyboard in Resources */,
 				DB0EED3E21E5A1C900ABAA53 /* Assets.xcassets in Resources */,
 				DB0EED3C21E5A1C400ABAA53 /* Main.storyboard in Resources */,
+				DB45C0FB21E84189008F20C9 /* sun-glasses.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

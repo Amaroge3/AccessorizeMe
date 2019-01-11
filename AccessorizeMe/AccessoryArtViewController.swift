@@ -8,8 +8,10 @@
 
 import UIKit
 
-class AccessoryArtViewController: UIViewController, UIDropInteractionDelegate, UIScrollViewDelegate {
-
+class AccessoryArtViewController: UIViewController, UIDropInteractionDelegate, UIScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    
+    
     @IBOutlet weak var dropZone: UIView! {
         didSet {
             dropZone.addInteraction(UIDropInteraction(delegate: self))
@@ -23,11 +25,17 @@ class AccessoryArtViewController: UIViewController, UIDropInteractionDelegate, U
             scrollView.maximumZoomScale = 5.0
             scrollView.delegate = self
             scrollView.addSubview(accessoryArtView)
-            
-            
         }
     }
+    
     var accessoryArtView = AccessoryArtView()
+    @IBOutlet weak var accessoriesCollectionView: UICollectionView!{
+        didSet {
+            accessoriesCollectionView.delegate = self
+            accessoriesCollectionView.dataSource = self
+        }
+    }
+    
     var accessoryBackgroundImage: UIImage? {
         get {
             return accessoryArtView.backgroundImage
@@ -39,7 +47,7 @@ class AccessoryArtViewController: UIViewController, UIDropInteractionDelegate, U
             accessoryArtView.frame = CGRect(origin: CGPoint.zero, size: size)
             scrollView?.contentSize = size
             
-    }
+        }
     }
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return accessoryArtView
@@ -52,7 +60,24 @@ class AccessoryArtViewController: UIViewController, UIDropInteractionDelegate, U
         scrollView.alwaysBounceVertical = true
         
     }
-
-
+    var fm = FileManager.default
+    
+    let path = Bundle.main.resourcePath
+    var accessories = [UIImage(named: "sun-glasses")]
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return accessories.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AccessoryCell", for: indexPath)
+        if let accessoryCell = cell as? AccessoryCollectionViewCell {
+            let image = accessories[indexPath.item]
+            accessoryCell.accessoryImage?.image = image
+            
+        }
+        return cell
+        
+    }
 }
 
