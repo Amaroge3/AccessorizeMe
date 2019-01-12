@@ -16,6 +16,13 @@
 		DB0EED5721E5A1C900ABAA53 /* AccessorizeMeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0EED5621E5A1C900ABAA53 /* AccessorizeMeUITests.swift */; };
 		DB45C0F721E80741008F20C9 /* AccessoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB45C0F621E80741008F20C9 /* AccessoryCollectionViewCell.swift */; };
 		DB45C0FB21E84189008F20C9 /* sun-glasses.png in Resources */ = {isa = PBXBuildFile; fileRef = DB45C0FA21E84189008F20C9 /* sun-glasses.png */; };
+		DB45C0FD21E84FBF008F20C9 /* earrings.png in Resources */ = {isa = PBXBuildFile; fileRef = DB45C0FC21E84FBF008F20C9 /* earrings.png */; };
+		DB45C0FF21E8681D008F20C9 /* mask-3.png in Resources */ = {isa = PBXBuildFile; fileRef = DB45C0FE21E8681D008F20C9 /* mask-3.png */; };
+		DB45C10121E8682C008F20C9 /* mask-2.png in Resources */ = {isa = PBXBuildFile; fileRef = DB45C10021E8682B008F20C9 /* mask-2.png */; };
+		DB45C10321E86865008F20C9 /* mask.png in Resources */ = {isa = PBXBuildFile; fileRef = DB45C10221E86865008F20C9 /* mask.png */; };
+		DB45C10721E86A65008F20C9 /* hat.png in Resources */ = {isa = PBXBuildFile; fileRef = DB45C10421E86A65008F20C9 /* hat.png */; };
+		DB45C10821E86A65008F20C9 /* handbag.png in Resources */ = {isa = PBXBuildFile; fileRef = DB45C10521E86A65008F20C9 /* handbag.png */; };
+		DB45C10921E86A65008F20C9 /* ears-2.png in Resources */ = {isa = PBXBuildFile; fileRef = DB45C10621E86A65008F20C9 /* ears-2.png */; };
 		DB89984621E73D310055F0D6 /* AccessoryArtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB89984521E73D310055F0D6 /* AccessoryArtView.swift */; };
 /* End PBXBuildFile section */
 
@@ -52,6 +59,13 @@
 		DB0EED5821E5A1C900ABAA53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DB45C0F621E80741008F20C9 /* AccessoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		DB45C0FA21E84189008F20C9 /* sun-glasses.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "sun-glasses.png"; path = "../../../../Downloads/sun-glasses.png"; sourceTree = "<group>"; };
+		DB45C0FC21E84FBF008F20C9 /* earrings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = earrings.png; path = ../../../../Downloads/earrings.png; sourceTree = "<group>"; };
+		DB45C0FE21E8681D008F20C9 /* mask-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "mask-3.png"; path = "../../../../Downloads/mask-3.png"; sourceTree = "<group>"; };
+		DB45C10021E8682B008F20C9 /* mask-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "mask-2.png"; path = "../../../../Downloads/mask-2.png"; sourceTree = "<group>"; };
+		DB45C10221E86865008F20C9 /* mask.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mask.png; path = ../../../../Downloads/mask.png; sourceTree = "<group>"; };
+		DB45C10421E86A65008F20C9 /* hat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = hat.png; path = ../../../../Downloads/hat.png; sourceTree = "<group>"; };
+		DB45C10521E86A65008F20C9 /* handbag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = handbag.png; path = ../../../../Downloads/handbag.png; sourceTree = "<group>"; };
+		DB45C10621E86A65008F20C9 /* ears-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ears-2.png"; path = "../../../../Downloads/ears-2.png"; sourceTree = "<group>"; };
 		DB89984521E73D310055F0D6 /* AccessoryArtView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessoryArtView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -137,7 +151,14 @@
 		DB45C0F921E8416F008F20C9 /* accessories */ = {
 			isa = PBXGroup;
 			children = (
+				DB45C10621E86A65008F20C9 /* ears-2.png */,
+				DB45C10521E86A65008F20C9 /* handbag.png */,
+				DB45C10421E86A65008F20C9 /* hat.png */,
+				DB45C10221E86865008F20C9 /* mask.png */,
+				DB45C10021E8682B008F20C9 /* mask-2.png */,
+				DB45C0FE21E8681D008F20C9 /* mask-3.png */,
 				DB45C0FA21E84189008F20C9 /* sun-glasses.png */,
+				DB45C0FC21E84FBF008F20C9 /* earrings.png */,
 			);
 			name = accessories;
 			path = "New Group";
@@ -249,8 +270,15 @@
 			files = (
 				DB0EED4121E5A1C900ABAA53 /* LaunchScreen.storyboard in Resources */,
 				DB0EED3E21E5A1C900ABAA53 /* Assets.xcassets in Resources */,
+				DB45C0FD21E84FBF008F20C9 /* earrings.png in Resources */,
 				DB0EED3C21E5A1C400ABAA53 /* Main.storyboard in Resources */,
+				DB45C10921E86A65008F20C9 /* ears-2.png in Resources */,
+				DB45C10121E8682C008F20C9 /* mask-2.png in Resources */,
 				DB45C0FB21E84189008F20C9 /* sun-glasses.png in Resources */,
+				DB45C10721E86A65008F20C9 /* hat.png in Resources */,
+				DB45C0FF21E8681D008F20C9 /* mask-3.png in Resources */,
+				DB45C10321E86865008F20C9 /* mask.png in Resources */,
+				DB45C10821E86A65008F20C9 /* handbag.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
