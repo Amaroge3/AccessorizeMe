@@ -8,8 +8,12 @@
 
 import UIKit
 
-class AccessoryArtViewController: UIViewController, UIDropInteractionDelegate, UIScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
+class AccessoryArtViewController: UIViewController, UIDropInteractionDelegate, UIScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDragDelegate, UICollectionViewDropDelegate {
+    func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
+        
+    }
     
+   
     
     
     @IBOutlet weak var dropZone: UIView! {
@@ -21,18 +25,26 @@ class AccessoryArtViewController: UIViewController, UIDropInteractionDelegate, U
     
     @IBOutlet weak var scrollView: UIScrollView! {
         didSet {
-            scrollView.minimumZoomScale = 0.5
+            scrollView.minimumZoomScale = 0.2
             scrollView.maximumZoomScale = 5.0
             scrollView.delegate = self
             scrollView.addSubview(accessoryArtView)
+            
+            
+            
         }
     }
     
     var accessoryArtView = AccessoryArtView()
     @IBOutlet weak var accessoriesCollectionView: UICollectionView!{
         didSet {
-            accessoriesCollectionView.delegate = self
             accessoriesCollectionView.dataSource = self
+
+            accessoriesCollectionView.delegate = self
+            accessoriesCollectionView.dragDelegate = self
+            
+            accessoriesCollectionView.dropDelegate = self
+            
         }
     }
     
@@ -41,11 +53,12 @@ class AccessoryArtViewController: UIViewController, UIDropInteractionDelegate, U
             return accessoryArtView.backgroundImage
         }
         set {
-            scrollView?.zoomScale = 1.0
             accessoryArtView.backgroundImage = newValue
             let size = newValue?.size ?? CGSize.zero
             accessoryArtView.frame = CGRect(origin: CGPoint.zero, size: size)
             scrollView?.contentSize = size
+            scrollView?.zoomScale = 1.0
+
             
         }
     }
@@ -79,5 +92,31 @@ class AccessoryArtViewController: UIViewController, UIDropInteractionDelegate, U
         return cell
         
     }
+    func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        session.localContext = collectionView
+        return dragItems(at: indexPath)
+    }
+    func dragItems(at indexPath: IndexPath) -> [UIDragItem] {
+        if let image = (accessoriesCollectionView.cellForItem(at: indexPath) as? AccessoryCollectionViewCell)?.accessoryImage?.image {
+            let dragItem = UIDragItem(itemProvider: NSItemProvider(object: image))
+            
+            dragItem.localObject = image
+            return [dragItem]
+        }
+        else {
+            return []
+        }
+    }
+    func collectionView(_ collectionView: UICollectionView, itemsForAddingTo session: UIDragSession, at indexPath: IndexPath, point: CGPoint) -> [UIDragItem] {
+        return dragItems(at: indexPath)
+    }
+    func dropInteraction(_ interaction: UIDropInteraction, canHandle session: UIDropSession) -> Bool {
+        return session.canLoadObjects(ofClass: UIImage.self)
+    }
+    func collectionView(_ collectionView: UICollectionView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UICollectionViewDropProposal {
+        let isSelf = session.localDragSession?.localContext as? UICollectionView == collectionView
+        return UICollectionViewDropProposal(operation: isSelf ? .move : .copy, intent: .insertAtDestinationIndexPath)
+    }
+    
 }
 
