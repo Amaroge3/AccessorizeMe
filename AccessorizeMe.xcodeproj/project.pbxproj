@@ -24,6 +24,7 @@
 		DB45C10821E86A65008F20C9 /* handbag.png in Resources */ = {isa = PBXBuildFile; fileRef = DB45C10521E86A65008F20C9 /* handbag.png */; };
 		DB45C10921E86A65008F20C9 /* ears-2.png in Resources */ = {isa = PBXBuildFile; fileRef = DB45C10621E86A65008F20C9 /* ears-2.png */; };
 		DB89984621E73D310055F0D6 /* AccessoryArtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB89984521E73D310055F0D6 /* AccessoryArtView.swift */; };
+		DB97562621EAA065000A627E /* AccessoryViewGestures.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB97562521EAA065000A627E /* AccessoryViewGestures.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		DB45C10521E86A65008F20C9 /* handbag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = handbag.png; path = ../../../../Downloads/handbag.png; sourceTree = "<group>"; };
 		DB45C10621E86A65008F20C9 /* ears-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ears-2.png"; path = "../../../../Downloads/ears-2.png"; sourceTree = "<group>"; };
 		DB89984521E73D310055F0D6 /* AccessoryArtView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessoryArtView.swift; sourceTree = "<group>"; };
+		DB97562521EAA065000A627E /* AccessoryViewGestures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessoryViewGestures.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +121,7 @@
 			children = (
 				DB45C0F921E8416F008F20C9 /* accessories */,
 				DB89984521E73D310055F0D6 /* AccessoryArtView.swift */,
+				DB97562521EAA065000A627E /* AccessoryViewGestures.swift */,
 				DB0EED3621E5A1C400ABAA53 /* AppDelegate.swift */,
 				DB0EED3821E5A1C400ABAA53 /* AccessoryArtViewController.swift */,
 				DB0EED3A21E5A1C400ABAA53 /* Main.storyboard */,
@@ -305,6 +308,7 @@
 			files = (
 				DB89984621E73D310055F0D6 /* AccessoryArtView.swift in Sources */,
 				DB45C0F721E80741008F20C9 /* AccessoryCollectionViewCell.swift in Sources */,
+				DB97562621EAA065000A627E /* AccessoryViewGestures.swift in Sources */,
 				DB0EED3921E5A1C400ABAA53 /* AccessoryArtViewController.swift in Sources */,
 				DB0EED3721E5A1C400ABAA53 /* AppDelegate.swift in Sources */,
 			);
