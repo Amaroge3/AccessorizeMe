@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="bBE-rM-eAd">
     <device id="ipad10_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -10,6 +10,47 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Split View Controller-->
+        <scene sceneID="dni-qn-5Ih">
+            <objects>
+                <splitViewController id="bBE-rM-eAd" sceneMemberID="viewController">
+                    <connections>
+                        <segue destination="VZu-Lo-dP0" kind="relationship" relationship="masterViewController" id="k3c-kr-KdS"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="detailViewController" id="02W-pa-Cfh"/>
+                    </connections>
+                </splitViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QtM-Vi-YGc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1108" y="-134"/>
+        </scene>
+        <!--Table View Controller-->
+        <scene sceneID="dBr-hl-Rni">
+            <objects>
+                <tableViewController id="VZu-Lo-dP0" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="8aX-RU-9EK">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="1112"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="rCg-PB-HAn">
+                                <rect key="frame" x="0.0" y="28" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rCg-PB-HAn" id="459-mq-gCv">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="VZu-Lo-dP0" id="NK8-ts-zQ7"/>
+                            <outlet property="delegate" destination="VZu-Lo-dP0" id="eZK-Wt-in6"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rNm-4m-pOE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="10" y="-565"/>
+        </scene>
         <!--Accessory Art View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -61,13 +102,15 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IMG_2525" translatesAutoresizingMaskIntoConstraints="NO" id="NSW-O4-K7F">
-                                                    <rect key="frame" x="0.0" y="0.0" width="60" height="90"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="60" height="80"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="NSW-O4-K7F" secondAttribute="height" multiplier="3:4" id="YZR-Y8-RZg"/>
+                                                    </constraints>
                                                 </imageView>
                                             </subviews>
                                         </view>
                                         <constraints>
-                                            <constraint firstItem="NSW-O4-K7F" firstAttribute="width" secondItem="Q11-WV-2pB" secondAttribute="height" multiplier="2:3" id="8bn-Xz-blc"/>
                                             <constraint firstItem="NSW-O4-K7F" firstAttribute="leading" secondItem="Q11-WV-2pB" secondAttribute="leading" id="Jn3-Wv-vfe"/>
                                             <constraint firstAttribute="bottom" secondItem="NSW-O4-K7F" secondAttribute="bottom" id="cIF-qn-PzZ"/>
                                             <constraint firstItem="NSW-O4-K7F" firstAttribute="width" secondItem="Q11-WV-2pB" secondAttribute="width" id="e5U-ac-Bkk"/>
