@@ -23,10 +23,10 @@
             </objects>
             <point key="canvasLocation" x="-1108" y="-134"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Accessory Table View Controller-->
         <scene sceneID="dBr-hl-Rni">
             <objects>
-                <tableViewController id="VZu-Lo-dP0" sceneMemberID="viewController">
+                <tableViewController id="VZu-Lo-dP0" customClass="AccessoryTableViewController" customModule="AccessorizeMe" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="8aX-RU-9EK">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="1112"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -62,23 +62,18 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PJp-Mc-2fv">
                                 <rect key="frame" x="0.0" y="128" width="834" height="984"/>
                                 <subviews>
-                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P1K-Ta-fmp">
-                                        <rect key="frame" x="0.0" y="1.1986062717651293" width="834" height="994"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" priority="250" constant="994" id="DDb-0I-a8l"/>
-                                            <constraint firstAttribute="width" priority="250" constant="834" id="abp-gA-lAl"/>
-                                        </constraints>
-                                        <viewLayoutGuide key="safeArea" id="h4x-h4-EyJ"/>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="P1K-Ta-fmp">
+                                        <rect key="frame" x="0.0" y="0.0" width="834" height="984"/>
                                     </scrollView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="P1K-Ta-fmp" firstAttribute="centerY" secondItem="PJp-Mc-2fv" secondAttribute="centerY" id="7Lf-qF-NgX"/>
-                                    <constraint firstItem="P1K-Ta-fmp" firstAttribute="top" relation="greaterThanOrEqual" secondItem="PJp-Mc-2fv" secondAttribute="top" id="YSB-iX-zTj"/>
+                                    <constraint firstItem="P1K-Ta-fmp" firstAttribute="top" secondItem="PJp-Mc-2fv" secondAttribute="top" id="YSB-iX-zTj"/>
                                     <constraint firstItem="P1K-Ta-fmp" firstAttribute="centerX" secondItem="PJp-Mc-2fv" secondAttribute="centerX" id="bkR-O6-DSi"/>
-                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="P1K-Ta-fmp" secondAttribute="trailing" id="cVa-JZ-U9f"/>
-                                    <constraint firstItem="P1K-Ta-fmp" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="PJp-Mc-2fv" secondAttribute="leading" id="lU7-ra-Cyi"/>
-                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="P1K-Ta-fmp" secondAttribute="bottom" id="mEq-Ga-ZMh"/>
+                                    <constraint firstAttribute="trailing" secondItem="P1K-Ta-fmp" secondAttribute="trailing" id="cVa-JZ-U9f"/>
+                                    <constraint firstItem="P1K-Ta-fmp" firstAttribute="leading" secondItem="PJp-Mc-2fv" secondAttribute="leading" id="lU7-ra-Cyi"/>
+                                    <constraint firstAttribute="bottom" secondItem="P1K-Ta-fmp" secondAttribute="bottom" id="mEq-Ga-ZMh"/>
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="XCj-s9-4Mo">
@@ -101,7 +96,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="60" height="80"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IMG_2525" translatesAutoresizingMaskIntoConstraints="NO" id="NSW-O4-K7F">
+                                                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sun-glasses" translatesAutoresizingMaskIntoConstraints="NO" id="NSW-O4-K7F">
                                                     <rect key="frame" x="0.0" y="0.0" width="60" height="80"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
@@ -112,7 +107,7 @@
                                         </view>
                                         <constraints>
                                             <constraint firstItem="NSW-O4-K7F" firstAttribute="leading" secondItem="Q11-WV-2pB" secondAttribute="leading" id="Jn3-Wv-vfe"/>
-                                            <constraint firstAttribute="bottom" secondItem="NSW-O4-K7F" secondAttribute="bottom" id="cIF-qn-PzZ"/>
+                                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="NSW-O4-K7F" secondAttribute="bottom" id="cIF-qn-PzZ"/>
                                             <constraint firstItem="NSW-O4-K7F" firstAttribute="width" secondItem="Q11-WV-2pB" secondAttribute="width" id="e5U-ac-Bkk"/>
                                             <constraint firstAttribute="trailing" secondItem="NSW-O4-K7F" secondAttribute="trailing" id="jCU-uQ-msY"/>
                                             <constraint firstItem="NSW-O4-K7F" firstAttribute="top" secondItem="Q11-WV-2pB" secondAttribute="top" id="ufG-9X-KAF"/>
@@ -140,8 +135,6 @@
                         <outlet property="accessoriesCollectionView" destination="XCj-s9-4Mo" id="ICo-sF-mFa"/>
                         <outlet property="dropZone" destination="PJp-Mc-2fv" id="8cw-Mo-ks6"/>
                         <outlet property="scrollView" destination="P1K-Ta-fmp" id="pOU-os-T7C"/>
-                        <outlet property="scrollViewHeight" destination="DDb-0I-a8l" id="IBY-w6-vmC"/>
-                        <outlet property="scrollViewWidth" destination="abp-gA-lAl" id="dR6-at-Egs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -150,6 +143,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="IMG_2525" width="2556" height="1444"/>
+        <image name="sun-glasses" width="512" height="512"/>
     </resources>
 </document>
