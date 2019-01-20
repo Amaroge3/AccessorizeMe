@@ -22,9 +22,7 @@ class AccessoryArtViewController: UIViewController, UIDropInteractionDelegate, U
             flowLayout?.invalidateLayout()
         }
     }
-    // MARK: - ScrollView Constraint Outlets
-    @IBOutlet weak var scrollViewHeight: NSLayoutConstraint!
-    @IBOutlet weak var scrollViewWidth: NSLayoutConstraint!
+  
     
     /**
      ### DropZone
@@ -47,25 +45,26 @@ class AccessoryArtViewController: UIViewController, UIDropInteractionDelegate, U
             scrollView.maximumZoomScale = 5.0
             scrollView.delegate = self
             scrollView.addSubview(accessoryArtView)
-            
-            let centerOffsetX = (scrollView.contentSize.width - scrollView.bounds.size.width) / 2
-            let centerOffsetY = (scrollView.contentSize.height - scrollView.bounds.size.height) / 2
-            let centerPoint = CGPoint(x: centerOffsetX, y: centerOffsetY)
-            scrollView.setContentOffset(centerPoint, animated: true)
+
+          centerScrollViewContent(scrollView)
         }
     }
     /**
       When the scroll view zooms, change the content height and width of the scroll view.
      */
     func scrollViewDidZoom(_ scrollView: UIScrollView) {
-        scrollViewHeight.constant = scrollView.contentSize.height
-        scrollViewWidth.constant = scrollView.contentSize.width
+//        scrollViewHeight.constant = dropZone.frame.height
+//        scrollViewWidth.constant = dropZone.frame.width
+
+        centerScrollViewContent(scrollView)
         
     }
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return accessoryArtView
     }
-    
+    override func viewDidLayoutSubviews() {
+        centerScrollViewContent(scrollView)
+    }
     //Accessory image
     var accessoryArtView = AccessoryArtView()
     @IBOutlet weak var accessoriesCollectionView: UICollectionView!{
@@ -89,8 +88,8 @@ class AccessoryArtViewController: UIViewController, UIDropInteractionDelegate, U
             scrollView?.contentSize = size
             scrollView?.zoomScale = 0.5
             accessoryArtView.backgroundColor = .clear
-            scrollViewHeight?.constant = scrollView.contentSize.height
-            scrollViewWidth?.constant = scrollView.contentSize.width
+//            scrollViewHeight?.constant = scrollView.contentSize.height
+
         }
     }
    
@@ -218,4 +217,19 @@ extension AccessoryArtViewController {
         
     }
     
+}
+extension AccessoryArtViewController {
+    func centerScrollViewContent(_ scrollView: UIScrollView){
+        let scrollViewSize = scrollView.bounds.size
+        let imageSize = accessoryArtView.frame.size
+            let horizontalSpace = imageSize.width < scrollViewSize.width
+        ? (scrollViewSize.width - imageSize.width) / 2
+        : 0
+        let verticalSpace = imageSize.height < scrollViewSize.height
+        ? (scrollViewSize.height - imageSize.height) / 2
+        : 0
+        scrollView.contentInset = UIEdgeInsets(top: verticalSpace, left: horizontalSpace, bottom: verticalSpace, right: horizontalSpace)
+        
+        
+}
 }
