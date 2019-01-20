@@ -35,10 +35,11 @@ class AccessoryArtView: UIView, UIDropInteractionDelegate {
         session.loadObjects(ofClass: UIImage.self) { providers in
             let dropPoint = session.location(in: self)
             for image in providers as? [UIImage] ?? [] {
-                var imageView = UIImageView()
+                let imageView = UIImageView()
                 imageView.frame.size = image.size
                 imageView.image = image
                 imageView.center = dropPoint
+                self.addAccessoryArtGestureRecognizers(to: imageView)
                 self.addSubview(imageView)
             }
             
