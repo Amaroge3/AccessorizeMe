@@ -64,16 +64,29 @@
                                 <subviews>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="P1K-Ta-fmp">
                                         <rect key="frame" x="0.0" y="0.0" width="834" height="984"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="JpT-D9-tft">
+                                                <rect key="frame" x="297" y="428" width="240" height="128"/>
+                                            </imageView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="JpT-D9-tft" firstAttribute="top" secondItem="P1K-Ta-fmp" secondAttribute="top" constant="428" id="Gbp-5G-ouC"/>
+                                            <constraint firstItem="JpT-D9-tft" firstAttribute="leading" secondItem="P1K-Ta-fmp" secondAttribute="leading" constant="297" id="Oko-JD-GbY"/>
+                                            <constraint firstAttribute="bottom" secondItem="JpT-D9-tft" secondAttribute="bottom" constant="428" id="ad4-ss-X64"/>
+                                            <constraint firstAttribute="height" priority="250" constant="984" id="jFu-Du-ujQ"/>
+                                            <constraint firstAttribute="width" priority="250" constant="834" id="rV5-uE-V9k"/>
+                                            <constraint firstAttribute="trailing" secondItem="JpT-D9-tft" secondAttribute="trailing" constant="297" id="uBN-fE-4xt"/>
+                                        </constraints>
                                     </scrollView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="P1K-Ta-fmp" firstAttribute="centerY" secondItem="PJp-Mc-2fv" secondAttribute="centerY" id="7Lf-qF-NgX"/>
-                                    <constraint firstItem="P1K-Ta-fmp" firstAttribute="top" secondItem="PJp-Mc-2fv" secondAttribute="top" id="YSB-iX-zTj"/>
+                                    <constraint firstItem="P1K-Ta-fmp" firstAttribute="top" relation="greaterThanOrEqual" secondItem="PJp-Mc-2fv" secondAttribute="top" id="YSB-iX-zTj"/>
                                     <constraint firstItem="P1K-Ta-fmp" firstAttribute="centerX" secondItem="PJp-Mc-2fv" secondAttribute="centerX" id="bkR-O6-DSi"/>
-                                    <constraint firstAttribute="trailing" secondItem="P1K-Ta-fmp" secondAttribute="trailing" id="cVa-JZ-U9f"/>
-                                    <constraint firstItem="P1K-Ta-fmp" firstAttribute="leading" secondItem="PJp-Mc-2fv" secondAttribute="leading" id="lU7-ra-Cyi"/>
-                                    <constraint firstAttribute="bottom" secondItem="P1K-Ta-fmp" secondAttribute="bottom" id="mEq-Ga-ZMh"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="P1K-Ta-fmp" secondAttribute="trailing" id="cVa-JZ-U9f"/>
+                                    <constraint firstItem="P1K-Ta-fmp" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="PJp-Mc-2fv" secondAttribute="leading" id="lU7-ra-Cyi"/>
+                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="P1K-Ta-fmp" secondAttribute="bottom" id="mEq-Ga-ZMh"/>
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="XCj-s9-4Mo">
@@ -110,7 +123,7 @@
                                             <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="NSW-O4-K7F" secondAttribute="bottom" id="cIF-qn-PzZ"/>
                                             <constraint firstItem="NSW-O4-K7F" firstAttribute="width" secondItem="Q11-WV-2pB" secondAttribute="width" id="e5U-ac-Bkk"/>
                                             <constraint firstAttribute="trailing" secondItem="NSW-O4-K7F" secondAttribute="trailing" id="jCU-uQ-msY"/>
-                                            <constraint firstItem="NSW-O4-K7F" firstAttribute="top" secondItem="Q11-WV-2pB" secondAttribute="top" id="ufG-9X-KAF"/>
+                                            <constraint firstItem="NSW-O4-K7F" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Q11-WV-2pB" secondAttribute="top" id="ufG-9X-KAF"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="accessoryImage" destination="NSW-O4-K7F" id="8w4-hM-C9y"/>
