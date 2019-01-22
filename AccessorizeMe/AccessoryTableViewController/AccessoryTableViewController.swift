@@ -17,7 +17,7 @@ class AccessoryTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        accessoryTableViewDocument = accessoryTableViewModel.accessoryDirectories
+        accessoryTableViewDocument = accessoryTableViewModel.accessoryImagesSubPaths
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -47,8 +47,26 @@ class AccessoryTableViewController: UITableViewController {
 
         return cell
     }
-    
-
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: "detailSegue", sender: indexPath)
+        
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier {
+        case "detailSegue":
+            if let indexPath = sender as? IndexPath,
+        let segueToMVC = segue.destination as? AccessoryArtViewController{
+            segueToMVC.accessorySubPath = accessoryTableViewDocument![indexPath.row]
+            tableView.deselectRow(at: indexPath, animated: true)
+            
+            toggleAnimatedHiddenSplitViewController()
+//            segueToMVC.updateCollectionViewAfterSeque()
+           
+            }
+        default: break
+        }
+    }
+   
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -94,4 +112,17 @@ class AccessoryTableViewController: UITableViewController {
     }
     */
 
+}
+extension UITableViewController {
+    func toggleAnimatedHiddenSplitViewController() {
+        if view.traitCollection.userInterfaceIdiom == .pad && splitViewController?.displayMode == .primaryOverlay {
+            let animations: () -> Void = {
+                self.splitViewController?.preferredDisplayMode = .primaryHidden
+            }
+            let completion: (Bool) -> Void = { _ in
+                self.splitViewController?.preferredDisplayMode = .automatic
+            }
+            UIView.animate(withDuration: 0.1, animations: animations, completion: completion)
+        }
+    }
 }

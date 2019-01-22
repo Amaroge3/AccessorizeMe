@@ -100,15 +100,21 @@ class AccessoryArtViewController: UIViewController, UIDropInteractionDelegate, U
         scrollView.alwaysBounceVertical = true
         flowLayout?.invalidateLayout()
         
+        scrollViewHeight.constant = scrollView.contentSize.height
+        scrollViewWidth.constant = scrollView.contentSize.width
         
         //load the images to the accessories array from the model
-        for item in accessoryModel.imagesNamesFromFolder! {
-            let image = UIImage(named: item)
-            accessories.append(image)
+        if let subPathFromSegue = accessorySubPath{
+            updateCollectionViewAfterSeque()
+            accessorySubPath = nil
         }
-        
+        else {
+            for item in accessoryModel.imagesNamesFromFolder! {
+                let image = UIImage(named: item)
+                accessories.append(image)
+            }
+        }
     }
-    
     
     //    func dropInteraction(_ interaction: UIDropInteraction, canHandle session: UIDropSession) -> Bool {
     //        return session.canLoadObjects(ofClass: UIImage.self)
@@ -116,6 +122,9 @@ class AccessoryArtViewController: UIViewController, UIDropInteractionDelegate, U
     //    func dropInteraction(_ interaction: UIDropInteraction, sessionDidUpdate session: UIDropSession) -> UIDropProposal {
     //        return UIDropProposal(operation: .copy)
     //    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+    }
     func dropInteraction(_ interaction: UIDropInteraction, performDrop session: UIDropSession) {
         session.loadObjects(ofClass: UIImage.self) { images in
             if let image = images.first as? UIImage {
@@ -143,7 +152,7 @@ class AccessoryArtViewController: UIViewController, UIDropInteractionDelegate, U
         return dragItems(at: indexPath)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionViewWidth, height: 90)
+        return CGSize(width: collectionViewWidth, height: collectionView.bounds.height)
         
     }
     func dragItems(at indexPath: IndexPath) -> [UIDragItem] {
@@ -187,7 +196,25 @@ class AccessoryArtViewController: UIViewController, UIDropInteractionDelegate, U
             
         }
     }
+    /**
+     Updates the collection view after a segue from the table view controller.
+     */
+    func updateCollectionViewAfterSeque() {
+        let newSubpath = "/\(accessorySubPath!)"
+        
+        accessoryModel.loadImagesFromFolder(in: newSubpath)
+        let accessoriesFromModel = accessoryModel.imagesNamesFromFolder
+        accessories = [UIImage?]()
+        //load the images to the accessories array from the model
+        for item in accessoriesFromModel! {
+            let image = UIImage(named: item)
+            accessories.append(image)
+        }
+        //refresh the collectionview
+        flowLayout?.invalidateLayout()
+    }
 }
+
 
 
 // MARK: - Extensions: ArtViewController
@@ -222,14 +249,16 @@ extension AccessoryArtViewController {
     func centerScrollViewContent(_ scrollView: UIScrollView){
         let scrollViewSize = scrollView.bounds.size
         let imageSize = accessoryArtView.frame.size
-            let horizontalSpace = imageSize.width < scrollViewSize.width
-        ? (scrollViewSize.width - imageSize.width) / 2
-        : 0
+        let horizontalSpace = imageSize.width < scrollViewSize.width
+            ? (scrollViewSize.width - imageSize.width) / 2
+            : 0
         let verticalSpace = imageSize.height < scrollViewSize.height
-        ? (scrollViewSize.height - imageSize.height) / 2
-        : 0
+            ? (scrollViewSize.height - imageSize.height) / 2
+            : 0
         scrollView.contentInset = UIEdgeInsets(top: verticalSpace, left: horizontalSpace, bottom: verticalSpace, right: horizontalSpace)
         
         
-}
+    }
+    
+    
 }
