@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 
 struct AccessoryTableViewModel {
-    // Directory of the accessory images  
-    public var accessoryDirectories: [String]?
+    // Directory of the accessory images
+    public var accessoryImagesSubPaths: [String]?
     // The name of the directory where the images are located
     var imagesDirectoryName = "/Accessory Images"
     
@@ -22,9 +22,8 @@ struct AccessoryTableViewModel {
      Gets the directory names from the file manager to use in the Table View.
  */
     public mutating func getDirectoriesFromBundlePath() {
-        let filemanager = FileManager.default
-        let path = Bundle.main.bundlePath
-        accessoryDirectories = try? filemanager.contentsOfDirectory(atPath: path + imagesDirectoryName)
+        
+        accessoryImagesSubPaths = FileManagerHelper.getContentsFromFolder(from: imagesDirectoryName)
     }
 
 }
