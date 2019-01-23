@@ -7,8 +7,12 @@
 //
 
 import UIKit
+import Foundation
 
 class AccessoryArtViewController: UIViewController, UIDropInteractionDelegate, UIScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDragDelegate, UICollectionViewDropDelegate {
+    
+    @IBOutlet weak var scrollViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var scrollViewWidth: NSLayoutConstraint!
     
     // MARK: - Flow Layout
     var flowLayout: UICollectionViewFlowLayout? {
@@ -16,13 +20,16 @@ class AccessoryArtViewController: UIViewController, UIDropInteractionDelegate, U
     }
     var accessories = [UIImage?]()
     var accessoryModel = AccessoryArtModel()
-    
     var collectionViewWidth: CGFloat = 50 {
         didSet{
             flowLayout?.invalidateLayout()
         }
     }
-  
+    var accessorySubPath: String? {
+        didSet {
+            updateCollectionViewFromMaster()
+        }
+    }
     
     /**
      ### DropZone
@@ -41,30 +48,24 @@ class AccessoryArtViewController: UIViewController, UIDropInteractionDelegate, U
      */
     @IBOutlet weak var scrollView: UIScrollView! {
         didSet {
-            scrollView.minimumZoomScale = 0.2
+            scrollView.minimumZoomScale = 0.1
             scrollView.maximumZoomScale = 5.0
             scrollView.delegate = self
             scrollView.addSubview(accessoryArtView)
-
-          centerScrollViewContent(scrollView)
         }
     }
     /**
-      When the scroll view zooms, change the content height and width of the scroll view.
+     When the scroll view zooms, change the content height and width of the scroll view.
      */
     func scrollViewDidZoom(_ scrollView: UIScrollView) {
-//        scrollViewHeight.constant = dropZone.frame.height
-//        scrollViewWidth.constant = dropZone.frame.width
-
-        centerScrollViewContent(scrollView)
+        scrollViewWidth.constant = scrollView.contentSize.width
+        scrollViewHeight.constant = scrollView.contentSize.height
         
     }
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return accessoryArtView
     }
-    override func viewDidLayoutSubviews() {
-        centerScrollViewContent(scrollView)
-    }
+    
     //Accessory image
     var accessoryArtView = AccessoryArtView()
     @IBOutlet weak var accessoriesCollectionView: UICollectionView!{
@@ -88,32 +89,23 @@ class AccessoryArtViewController: UIViewController, UIDropInteractionDelegate, U
             scrollView?.contentSize = size
             scrollView?.zoomScale = 0.5
             accessoryArtView.backgroundColor = .clear
-//            scrollViewHeight?.constant = scrollView.contentSize.height
-
+            scrollViewHeight.constant = scrollView.contentSize.height
+            scrollViewWidth.constant = scrollView.contentSize.width
         }
     }
-   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        accessoryBackgroundImage = UIImage(named: "sun-glasses")
-        scrollView.alwaysBounceHorizontal = true
-        scrollView.alwaysBounceVertical = true
-        flowLayout?.invalidateLayout()
-        
+        accessoryBackgroundImage = UIImage(named: "IMG_2525")
         scrollViewHeight.constant = scrollView.contentSize.height
         scrollViewWidth.constant = scrollView.contentSize.width
+                //load the images to the accessories array from the model
         
-        //load the images to the accessories array from the model
-        if let subPathFromSegue = accessorySubPath{
-            updateCollectionViewAfterSeque()
-            accessorySubPath = nil
-        }
-        else {
-            for item in accessoryModel.imagesNamesFromFolder! {
-                let image = UIImage(named: item)
-                accessories.append(image)
-            }
-        }
+                    for item in accessoryModel.imagesNamesFromFolder! {
+                        let image = UIImage(named: item)
+                        accessories.append(image)
+                    }
+        
     }
     
     //    func dropInteraction(_ interaction: UIDropInteraction, canHandle session: UIDropSession) -> Bool {
@@ -142,6 +134,7 @@ class AccessoryArtViewController: UIViewController, UIDropInteractionDelegate, U
         if let accessoryCell = cell as? AccessoryCollectionViewCell {
             let image = accessories[indexPath.item]
             accessoryCell.accessoryImage?.image = image
+            
             
         }
         return cell
@@ -199,7 +192,7 @@ class AccessoryArtViewController: UIViewController, UIDropInteractionDelegate, U
     /**
      Updates the collection view after a segue from the table view controller.
      */
-    func updateCollectionViewAfterSeque() {
+    func updateCollectionViewFromMaster() {
         let newSubpath = "/\(accessorySubPath!)"
         
         accessoryModel.loadImagesFromFolder(in: newSubpath)
@@ -211,7 +204,9 @@ class AccessoryArtViewController: UIViewController, UIDropInteractionDelegate, U
             accessories.append(image)
         }
         //refresh the collectionview
-        flowLayout?.invalidateLayout()
+        DispatchQueue.main.async {
+            self.accessoriesCollectionView.reloadData()
+        }
     }
 }
 
