@@ -10,8 +10,6 @@ import UIKit
 
 class AccessoryTableViewController: UITableViewController {
 
-    
-    
     lazy var accessoryTableViewModel = AccessoryTableViewModel()
     var accessoryTableViewDocument: [String]?
 
@@ -48,25 +46,35 @@ class AccessoryTableViewController: UITableViewController {
         return cell
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.performSegue(withIdentifier: "detailSegue", sender: indexPath)
+//        self.performSegue(withIdentifier: "detailSegue", sender: indexPath)
+        let accessoryType = accessoryTableViewDocument![indexPath.row]
+        if let split = self.splitViewController {
+            let controllers = split.viewControllers
+            let detailViewController = controllers[controllers.count - 1] as? AccessoryArtViewController
+            detailViewController?.accessorySubPath = accessoryTableViewDocument![indexPath.row]
+            
+            
+        }
+        
+        toggleAnimatedHiddenSplitViewController()
         
     }
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        switch segue.identifier {
-        case "detailSegue":
-            if let indexPath = sender as? IndexPath,
-        let segueToMVC = segue.destination as? AccessoryArtViewController{
-            segueToMVC.accessorySubPath = accessoryTableViewDocument![indexPath.row]
-            tableView.deselectRow(at: indexPath, animated: true)
-            
-            toggleAnimatedHiddenSplitViewController()
-//            segueToMVC.updateCollectionViewAfterSeque()
-           
-            }
-        default: break
-        }
-    }
-   
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        switch segue.identifier {
+//        case "detailSegue":
+//            if let indexPath = sender as? IndexPath,
+//        let segueToMVC = segue.destination as? AccessoryArtViewController{
+//            segueToMVC.accessorySubPath = accessoryTableViewDocument![indexPath.row]
+//            tableView.deselectRow(at: indexPath, animated: true)
+//
+//            toggleAnimatedHiddenSplitViewController()
+////            segueToMVC.updateCollectionViewAfterSeque()
+//
+//            }
+//        default: break
+//        }
+//    }
+//
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
