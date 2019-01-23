@@ -12,16 +12,14 @@ class AccessoryArtModel {
     
     
     var imagesNamesFromFolder: [String]?
-    
+    var imagesFolder = "/Masks"
     init(){
-        loadImagesFromFolder()
+        loadImagesFromFolder(in: imagesFolder)
         
     }
     
-    func loadImagesFromFolder() {
-        let fm = FileManager.default
-        let path = Bundle.main.bundlePath
-        imagesNamesFromFolder = try? fm.contentsOfDirectory(atPath: path + "/Accessory Images" + "/Sunglasses")
+    func loadImagesFromFolder(in subpath: String) {
+        imagesNamesFromFolder = FileManagerHelper.getContentsFromFolder(from: "/Accessory Images" + subpath)
         imagesNamesFromFolder = imagesNamesFromFolder?.filter({ $0.hasSuffix(".png")
         })
     }
