@@ -10,6 +10,7 @@ import UIKit
 
 class AccessoryCollectionViewCell: UICollectionViewCell {
     
+    //The image that is inside the collection view cell
     @IBOutlet weak var accessoryImage: UIImageView!
     
     override init(frame: CGRect) {

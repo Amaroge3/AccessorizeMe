@@ -9,7 +9,7 @@
 import UIKit
 
 class AccessoryArtView: UIView, UIDropInteractionDelegate {
-    
+    // the background image of the AccessoryArtView
     var backgroundImage: UIImage? {
         didSet { setNeedsDisplay() }
     }
@@ -22,6 +22,13 @@ class AccessoryArtView: UIView, UIDropInteractionDelegate {
         super.init(coder: aDecoder)
         setup()
     }
+    /**
+     # Setup
+        Adds the UIDropInteraction
+     - Parameters:
+        delegate:
+        Sets the delegate to the AccessoryArtView
+     */
     private func setup() {
         addInteraction(UIDropInteraction(delegate: self))
         

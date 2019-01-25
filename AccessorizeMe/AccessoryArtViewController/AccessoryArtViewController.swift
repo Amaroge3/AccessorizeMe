@@ -11,37 +11,12 @@ import Foundation
 
 class AccessoryArtViewController: UIViewController, UIDropInteractionDelegate, UIScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDragDelegate, UICollectionViewDropDelegate {
     
+    
+    // MARK: - Scroll View Layout Constraints Outlets
     @IBOutlet weak var scrollViewHeight: NSLayoutConstraint!
     @IBOutlet weak var scrollViewWidth: NSLayoutConstraint!
     
-    // MARK: - Flow Layout
-    var flowLayout: UICollectionViewFlowLayout? {
-        return accessoriesCollectionView?.collectionViewLayout as? UICollectionViewFlowLayout
-    }
-    var accessories = [UIImage?]()
-    var accessoryModel = AccessoryArtModel()
-    var collectionViewWidth: CGFloat = 50 {
-        didSet{
-            flowLayout?.invalidateLayout()
-        }
-    }
-    var accessorySubPath: String? {
-        didSet {
-            updateCollectionViewFromMaster()
-        }
-    }
-    
-    /**
-     ### DropZone
-     The view where the collection view items are dropped to.
-     */
-    @IBOutlet weak var dropZone: UIView! {
-        didSet {
-            dropZone.addInteraction(UIDropInteraction(delegate: self))
-        }
-    }
-    
-    // MARK: - Scroll View
+    // MARK: - OUTLETS
     /**
      ### Scroll View
      The scroll view in the storyboard that holds the accessoryArtView to scroll.
@@ -54,7 +29,55 @@ class AccessoryArtViewController: UIViewController, UIDropInteractionDelegate, U
             scrollView.addSubview(accessoryArtView)
         }
     }
+    
+    
+    //Drop Zone Outlet
+    @IBOutlet weak var dropZone: UIView! {
+        didSet {
+            dropZone.addInteraction(UIDropInteraction(delegate: self))
+        }
+    }
+    
+    // Collection View Outlet
+    @IBOutlet weak var accessoriesCollectionView: UICollectionView!{
+        didSet {
+            accessoriesCollectionView.dataSource = self
+            accessoriesCollectionView.delegate = self
+            accessoriesCollectionView.dragDelegate = self
+            accessoriesCollectionView.dropDelegate = self
+            addUICollectionViewRecognizer()
+        }
+    }
+    
+    // MARK: - Flow Layout
+    var flowLayout: UICollectionViewFlowLayout? {
+        return accessoriesCollectionView?.collectionViewLayout as? UICollectionViewFlowLayout
+    }
+    //accessories array for the images to load onto the collection view
+    var accessories = [UIImage?]()
+    
+    //AccessoryArtModel instance
+    var accessoryModel = AccessoryArtModel()
+    
+    //collection view width
+    var collectionViewWidth: CGFloat = 50 {
+        didSet{
+            flowLayout?.invalidateLayout()
+        }
+    }
+    
+    // Subpath that's retrieved from the Table View and sent to the File Manager for lookup.
+    var accessorySubPath: String? {
+        didSet {
+            updateCollectionViewFromMaster()
+        }
+    }
+    
+    
+    // MARK: - Scroll View
+    
     /**
+     # Scroll View Did Zoom
      When the scroll view zooms, change the content height and width of the scroll view.
      */
     func scrollViewDidZoom(_ scrollView: UIScrollView) {
@@ -66,18 +89,12 @@ class AccessoryArtViewController: UIViewController, UIDropInteractionDelegate, U
         return accessoryArtView
     }
     
+    // MARK: - Images Properties
+    
     //Accessory image
     var accessoryArtView = AccessoryArtView()
-    @IBOutlet weak var accessoriesCollectionView: UICollectionView!{
-        didSet {
-            accessoriesCollectionView.dataSource = self
-            accessoriesCollectionView.delegate = self
-            accessoriesCollectionView.dragDelegate = self
-            accessoriesCollectionView.dropDelegate = self
-            addUICollectionViewRecognizer()
-        }
-    }
     
+    //Background Image
     var accessoryBackgroundImage: UIImage? {
         get {
             return accessoryArtView.backgroundImage
@@ -94,17 +111,19 @@ class AccessoryArtViewController: UIViewController, UIDropInteractionDelegate, U
         }
     }
     
+    
+    // MARK: - VIEW DID LOAD
     override func viewDidLoad() {
         super.viewDidLoad()
         accessoryBackgroundImage = UIImage(named: "IMG_2525")
         scrollViewHeight.constant = scrollView.contentSize.height
         scrollViewWidth.constant = scrollView.contentSize.width
-                //load the images to the accessories array from the model
+        //load the images to the accessories array from the model
         
-                    for item in accessoryModel.imagesNamesFromFolder! {
-                        let image = UIImage(named: item)
-                        accessories.append(image)
-                    }
+        for item in accessoryModel.imagesNamesFromFolder! {
+            let image = UIImage(named: item)
+            accessories.append(image)
+        }
         
     }
     
@@ -114,9 +133,13 @@ class AccessoryArtViewController: UIViewController, UIDropInteractionDelegate, U
     //    func dropInteraction(_ interaction: UIDropInteraction, sessionDidUpdate session: UIDropSession) -> UIDropProposal {
     //        return UIDropProposal(operation: .copy)
     //    }
+    
+    // MARK: - VIEW DID APPEAR
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
     }
+    
+    // MARK: - Drop Interaction
     func dropInteraction(_ interaction: UIDropInteraction, performDrop session: UIDropSession) {
         session.loadObjects(ofClass: UIImage.self) { images in
             if let image = images.first as? UIImage {
@@ -124,7 +147,8 @@ class AccessoryArtViewController: UIViewController, UIDropInteractionDelegate, U
             }
         }
     }
-    // MARK: - Collection View
+    // MARK: - Collection View - Data Source
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return accessories.count
     }
@@ -134,12 +158,11 @@ class AccessoryArtViewController: UIViewController, UIDropInteractionDelegate, U
         if let accessoryCell = cell as? AccessoryCollectionViewCell {
             let image = accessories[indexPath.item]
             accessoryCell.accessoryImage?.image = image
-            
-            
         }
         return cell
         
     }
+    // MARK: - Collection View Drag Delegates
     func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
         session.localContext = collectionView
         return dragItems(at: indexPath)
@@ -159,8 +182,6 @@ class AccessoryArtViewController: UIViewController, UIDropInteractionDelegate, U
             return []
         }
     }
-    
-    // MARK: - Collection View Drag
     func collectionView(_ collectionView: UICollectionView, itemsForAddingTo session: UIDragSession, at indexPath: IndexPath, point: CGPoint) -> [UIDragItem] {
         return dragItems(at: indexPath)
     }
@@ -210,8 +231,6 @@ class AccessoryArtViewController: UIViewController, UIDropInteractionDelegate, U
     }
 }
 
-
-
 // MARK: - Extensions: ArtViewController
 extension AccessoryArtViewController {
     func addUICollectionViewRecognizer() {
@@ -226,12 +245,11 @@ extension AccessoryArtViewController {
             accessoriesCollectionView.dragInteractionEnabled = false
             accessoriesCollectionView.allowsSelection = false
         case .changed, .ended:
-            if let collectionView = accessoriesCollectionView as? UICollectionView {
                 collectionViewWidth *= recognizer.scale
                 recognizer.scale = 1.0
                 accessoriesCollectionView.dragInteractionEnabled = true
                 accessoriesCollectionView.allowsSelection = true
-            }
+            
             
         default:
             break
@@ -252,8 +270,7 @@ extension AccessoryArtViewController {
             : 0
         scrollView.contentInset = UIEdgeInsets(top: verticalSpace, left: horizontalSpace, bottom: verticalSpace, right: horizontalSpace)
         
-        
+
     }
-    
     
 }
