@@ -15,6 +15,7 @@ class AccessoryTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         accessoryTableViewDocument = accessoryTableViewModel.accessoryImagesSubPaths
         
         // Uncomment the following line to preserve selection between presentations
@@ -26,55 +27,50 @@ class AccessoryTableViewController: UITableViewController {
     
     // MARK: - Table view data source
 
+    /**
+        # Number of Sections
+    */
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
+    /**
+     # Number of Rows In Section
+    */
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return accessoryTableViewDocument!.count
     }
 
-    
+    /**
+     # Cell for Row At
+        The table view function retrieves the custom cell and assigns the accessory types to the cell's
+        text label.
+    */
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "AccessoryCell", for: indexPath)
             cell.textLabel?.text = accessoryTableViewDocument![indexPath.row]
         
-        // Configure the cell...
-
         return cell
     }
+    /**
+     # TableView DidSeletRowAt
+        TableView Function that shows the split view MVC and sends the accessory type the user selects
+        from the table view.
+ */
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        self.performSegue(withIdentifier: "detailSegue", sender: indexPath)
         let accessoryType = accessoryTableViewDocument![indexPath.row]
         if let split = self.splitViewController {
             let controllers = split.viewControllers
             let detailViewController = controllers[controllers.count - 1] as? AccessoryArtViewController
-            detailViewController?.accessorySubPath = accessoryTableViewDocument![indexPath.row]
-            
-            
+            detailViewController?.accessorySubPath = accessoryType
         }
-        
+        //hides the master view controller
         toggleAnimatedHiddenSplitViewController()
         
     }
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        switch segue.identifier {
-//        case "detailSegue":
-//            if let indexPath = sender as? IndexPath,
-//        let segueToMVC = segue.destination as? AccessoryArtViewController{
-//            segueToMVC.accessorySubPath = accessoryTableViewDocument![indexPath.row]
-//            tableView.deselectRow(at: indexPath, animated: true)
-//
-//            toggleAnimatedHiddenSplitViewController()
-////            segueToMVC.updateCollectionViewAfterSeque()
-//
-//            }
-//        default: break
-//        }
-//    }
-//
+
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -122,6 +118,10 @@ class AccessoryTableViewController: UITableViewController {
 
 }
 extension UITableViewController {
+    /**
+     # Toggle Animated Split View Controller
+        Hides the split view controller with animation.
+    */
     func toggleAnimatedHiddenSplitViewController() {
         if view.traitCollection.userInterfaceIdiom == .pad && splitViewController?.displayMode == .primaryOverlay {
             let animations: () -> Void = {
