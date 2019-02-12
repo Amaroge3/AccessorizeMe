@@ -63,7 +63,8 @@ class AccessoryTableViewController: UITableViewController {
         let accessoryType = accessoryTableViewDocument![indexPath.row]
         if let split = self.splitViewController {
             let controllers = split.viewControllers
-            let detailViewController = controllers[controllers.count - 1] as? AccessoryArtViewController
+            let nvc = controllers[controllers.count - 1] as? UINavigationController
+            let detailViewController = nvc?.topViewController as? AccessoryArtViewController
             detailViewController?.accessorySubPath = accessoryType
         }
         //hides the master view controller

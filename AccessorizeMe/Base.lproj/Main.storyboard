@@ -16,7 +16,7 @@
                 <splitViewController id="bBE-rM-eAd" sceneMemberID="viewController">
                     <connections>
                         <segue destination="VZu-Lo-dP0" kind="relationship" relationship="masterViewController" id="k3c-kr-KdS"/>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="detailViewController" id="02W-pa-Cfh"/>
+                        <segue destination="2Gs-8b-g3q" kind="relationship" relationship="detailViewController" id="02W-pa-Cfh"/>
                     </connections>
                 </splitViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QtM-Vi-YGc" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -47,7 +47,7 @@
                         </connections>
                     </tableView>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="show" identifier="detailSegue" id="QIG-bb-wN5"/>
+                        <segue destination="2Gs-8b-g3q" kind="show" identifier="detailSegue" id="QIG-bb-wN5"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rNm-4m-pOE" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -63,7 +63,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PJp-Mc-2fv">
-                                <rect key="frame" x="0.0" y="108" width="834" height="1004"/>
+                                <rect key="frame" x="0.0" y="178" width="834" height="884"/>
                                 <subviews>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P1K-Ta-fmp">
                                         <rect key="frame" x="0.0" y="0.0" width="834" height="984"/>
@@ -85,7 +85,7 @@
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="XCj-s9-4Mo">
-                                <rect key="frame" x="10" y="10" width="814" height="90"/>
+                                <rect key="frame" x="10" y="80" width="814" height="90"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="90" id="Mye-dQ-2d1"/>
@@ -139,7 +139,10 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" id="AhZ-D7-KOA"/>
+                    <navigationItem key="navigationItem" id="AhZ-D7-KOA">
+                        <barButtonItem key="rightBarButtonItem" systemItem="camera" id="bBO-p7-qrS"/>
+                    </navigationItem>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="accessoriesCollectionView" destination="XCj-s9-4Mo" id="ICo-sF-mFa"/>
                         <outlet property="dropZone" destination="PJp-Mc-2fv" id="8cw-Mo-ks6"/>
@@ -150,7 +153,26 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="26" y="162"/>
+            <point key="canvasLocation" x="778.41726618705036" y="161.87050359712231"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="TqE-SP-0IK">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="2Gs-8b-g3q" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Mba-sm-clC">
+                        <rect key="frame" x="0.0" y="20" width="834" height="50"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="RzP-lM-Pab"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JUR-rY-5mh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="25.899280575539571" y="161.87050359712231"/>
         </scene>
     </scenes>
     <resources>
