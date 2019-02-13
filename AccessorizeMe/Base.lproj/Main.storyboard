@@ -140,11 +140,16 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="AhZ-D7-KOA">
-                        <barButtonItem key="rightBarButtonItem" systemItem="camera" id="bBO-p7-qrS"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="camera" id="bBO-p7-qrS">
+                            <connections>
+                                <action selector="loadBackgroundImage:" destination="BYZ-38-t0r" id="Zrj-bd-0Wd"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="accessoriesCollectionView" destination="XCj-s9-4Mo" id="ICo-sF-mFa"/>
+                        <outlet property="cameraButton" destination="bBO-p7-qrS" id="lLk-xB-3hV"/>
                         <outlet property="dropZone" destination="PJp-Mc-2fv" id="8cw-Mo-ks6"/>
                         <outlet property="scrollView" destination="P1K-Ta-fmp" id="pOU-os-T7C"/>
                         <outlet property="scrollViewHeight" destination="jFu-Du-ujQ" id="8cr-O7-YW3"/>

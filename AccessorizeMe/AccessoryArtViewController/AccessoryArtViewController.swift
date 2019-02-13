@@ -8,9 +8,36 @@
 
 import UIKit
 import Foundation
-
-class AccessoryArtViewController: UIViewController, UIDropInteractionDelegate, UIScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDragDelegate, UICollectionViewDropDelegate {
+import MobileCoreServices
+class AccessoryArtViewController: UIViewController, UIDropInteractionDelegate, UIScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDragDelegate, UICollectionViewDropDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
+    
+    // MARK: - Camera
+    @IBOutlet weak var cameraButton: UIBarButtonItem! {
+        didSet {
+            cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
+        }
+    }
+    @IBAction func loadBackgroundImage(_ sender: Any) {
+        let picker = UIImagePickerController()
+        picker.sourceType = .camera
+        picker.mediaTypes = [kUTTypeImage as String]
+        picker.allowsEditing = true
+        picker.delegate = self
+        present(picker, animated: true)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.presentingViewController?.dismiss(animated: true)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let image = (info[.editedImage] ?? info[.originalImage]) as? UIImage
+        if let imageData = image?.jpegData(compressionQuality: 1.0) {
+            accessoryBackgroundImage = UIImage(data: imageData)
+        }
+        dismiss(animated: true)
+    }
     
     // MARK: - Scroll View Layout Constraints Outlets
     @IBOutlet weak var scrollViewHeight: NSLayoutConstraint!
@@ -29,8 +56,6 @@ class AccessoryArtViewController: UIViewController, UIDropInteractionDelegate, U
             scrollView.addSubview(accessoryArtView)
         }
     }
-    
-    
     //Drop Zone Outlet
     @IBOutlet weak var dropZone: UIView! {
         didSet {
