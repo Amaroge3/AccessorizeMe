@@ -142,7 +142,7 @@
                     <navigationItem key="navigationItem" id="AhZ-D7-KOA">
                         <barButtonItem key="rightBarButtonItem" systemItem="camera" id="bBO-p7-qrS">
                             <connections>
-                                <action selector="loadBackgroundImage:" destination="BYZ-38-t0r" id="Zrj-bd-0Wd"/>
+                                <action selector="selectPhoto:" destination="BYZ-38-t0r" id="zsf-rR-eat"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

@@ -15,10 +15,14 @@ class AccessoryArtViewController: UIViewController, UIDropInteractionDelegate, U
     // MARK: - Camera
     @IBOutlet weak var cameraButton: UIBarButtonItem! {
         didSet {
-            cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
+//            cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
+       cameraButton.isEnabled = true
         }
     }
-    @IBAction func loadBackgroundImage(_ sender: Any) {
+    /*
+     A function that adds
+     */
+    func loadBackgroundImage() {
         let picker = UIImagePickerController()
         picker.sourceType = .camera
         picker.mediaTypes = [kUTTypeImage as String]
@@ -39,6 +43,34 @@ class AccessoryArtViewController: UIViewController, UIDropInteractionDelegate, U
         dismiss(animated: true)
     }
     
+    @IBAction func selectPhoto(_ sender: UIBarButtonItem) {
+        var actionSheet = UIAlertController(
+            title: "Source Selection",
+            message: "Choose The Source Of Your Photo",
+            preferredStyle: .actionSheet)
+        
+        actionSheet.addAction(UIAlertAction(
+            title: "Camera",
+            style: .default,
+            handler: { [weak self] action in
+                self?.loadBackgroundImage()
+        }))
+        actionSheet.addAction(UIAlertAction(
+            title: "My Photo Library",
+            style: .default,
+            handler: { [weak self] action in
+        }))
+        actionSheet.addAction(UIAlertAction(
+            title: "Cancel",
+            style: .destructive,
+            handler: { action in
+            self.presentingViewController?.dismiss(animated: true)
+        }))
+        actionSheet.modalPresentationStyle = .popover
+        let ppc = actionSheet.popoverPresentationController
+        ppc?.barButtonItem = cameraButton
+        present(actionSheet, animated: true, completion: nil)
+    }
     // MARK: - Scroll View Layout Constraints Outlets
     @IBOutlet weak var scrollViewHeight: NSLayoutConstraint!
     @IBOutlet weak var scrollViewWidth: NSLayoutConstraint!
