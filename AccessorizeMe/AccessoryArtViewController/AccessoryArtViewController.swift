@@ -15,36 +15,69 @@ class AccessoryArtViewController: UIViewController, UIDropInteractionDelegate, U
     // MARK: - Camera
     @IBOutlet weak var cameraButton: UIBarButtonItem! {
         didSet {
-//            cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
-       cameraButton.isEnabled = true
+            cameraButton.isEnabled = true
         }
     }
     /*
-     A function that adds
+     A function that allows the user to choose to load an image from the camera if the camera is available.
      */
-    func loadBackgroundImage() {
-        let picker = UIImagePickerController()
-        picker.sourceType = .camera
-        picker.mediaTypes = [kUTTypeImage as String]
-        picker.allowsEditing = true
-        picker.delegate = self
-        present(picker, animated: true)
+    func loadBackgroundImageFromCamera() {
+        if UIImagePickerController.isSourceTypeAvailable(.camera){
+            
+            let picker = UIImagePickerController()
+            picker.sourceType = .camera
+            picker.mediaTypes = [kUTTypeImage as String]
+            picker.allowsEditing = true
+            picker.delegate = self
+            present(picker, animated: true)
+        }
+        else {
+            //if the user does not have a camera on the device, then show an alert action notifying the user.
+            let alert = UIAlertController(
+            title: "No Camera Available",
+            message: "There is no camera available on this device. Please choose another method of loading your image.",
+            preferredStyle: .alert)
+            alert.addAction(UIAlertAction(
+                title: "Dismiss",
+                style: .destructive,
+                handler: { [weak self] action in
+                    self?.presentingViewController?.dismiss(animated: true)
+            }))
+            alert.modalPresentationStyle = .popover
+            present(alert, animated: true)
+        }
     }
     
+    // a function to have a user choose an image to load from the photo library on their device.
+    func loadBackgroundImageFromPhotoLibrary() {
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
+            
+            let picker = UIImagePickerController()
+            picker.sourceType = .photoLibrary
+            picker.mediaTypes = [kUTTypeImage as String]
+            picker.delegate = self
+            present(picker, animated: true)
+        }
+    }
+    
+    //function that handles when the UIImagePickerController cancels
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.presentingViewController?.dismiss(animated: true)
     }
     
+    //loads the image the user captures to the accessoryBackgroundImage
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
         let image = (info[.editedImage] ?? info[.originalImage]) as? UIImage
         if let imageData = image?.jpegData(compressionQuality: 1.0) {
             accessoryBackgroundImage = UIImage(data: imageData)
         }
         dismiss(animated: true)
+        
     }
-    
+    //select photo button action on the navigation controller
     @IBAction func selectPhoto(_ sender: UIBarButtonItem) {
-        var actionSheet = UIAlertController(
+        let actionSheet = UIAlertController(
             title: "Source Selection",
             message: "Choose The Source Of Your Photo",
             preferredStyle: .actionSheet)
@@ -53,24 +86,26 @@ class AccessoryArtViewController: UIViewController, UIDropInteractionDelegate, U
             title: "Camera",
             style: .default,
             handler: { [weak self] action in
-                self?.loadBackgroundImage()
+                self?.loadBackgroundImageFromCamera()
         }))
         actionSheet.addAction(UIAlertAction(
             title: "My Photo Library",
             style: .default,
             handler: { [weak self] action in
+                self?.loadBackgroundImageFromPhotoLibrary()
         }))
         actionSheet.addAction(UIAlertAction(
             title: "Cancel",
             style: .destructive,
-            handler: { action in
-            self.presentingViewController?.dismiss(animated: true)
+            handler: { [weak self] action in
+                self?.presentingViewController?.dismiss(animated: true)
         }))
         actionSheet.modalPresentationStyle = .popover
         let ppc = actionSheet.popoverPresentationController
         ppc?.barButtonItem = cameraButton
         present(actionSheet, animated: true, completion: nil)
     }
+    
     // MARK: - Scroll View Layout Constraints Outlets
     @IBOutlet weak var scrollViewHeight: NSLayoutConstraint!
     @IBOutlet weak var scrollViewWidth: NSLayoutConstraint!
@@ -302,10 +337,10 @@ extension AccessoryArtViewController {
             accessoriesCollectionView.dragInteractionEnabled = false
             accessoriesCollectionView.allowsSelection = false
         case .changed, .ended:
-                collectionViewWidth *= recognizer.scale
-                recognizer.scale = 1.0
-                accessoriesCollectionView.dragInteractionEnabled = true
-                accessoriesCollectionView.allowsSelection = true
+            collectionViewWidth *= recognizer.scale
+            recognizer.scale = 1.0
+            accessoriesCollectionView.dragInteractionEnabled = true
+            accessoriesCollectionView.allowsSelection = true
             
             
         default:
@@ -327,7 +362,7 @@ extension AccessoryArtViewController {
             : 0
         scrollView.contentInset = UIEdgeInsets(top: verticalSpace, left: horizontalSpace, bottom: verticalSpace, right: horizontalSpace)
         
-
+        
     }
     
 }
