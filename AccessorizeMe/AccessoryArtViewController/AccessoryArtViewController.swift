@@ -9,8 +9,8 @@
 import UIKit
 import Foundation
 import MobileCoreServices
+
 class AccessoryArtViewController: UIViewController, UIDropInteractionDelegate, UIScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDragDelegate, UICollectionViewDropDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
     
     // MARK: - Camera
     @IBOutlet weak var cameraButton: UIBarButtonItem! {
@@ -196,7 +196,7 @@ class AccessoryArtViewController: UIViewController, UIDropInteractionDelegate, U
             let size = newValue?.size ?? CGSize.zero
             accessoryArtView.frame = CGRect(origin: CGPoint.zero, size: size)
             scrollView?.contentSize = size
-            scrollView?.zoomScale = 0.5
+            scrollView?.zoomScale = 0.33
             accessoryArtView.backgroundColor = .clear
             scrollViewHeight.constant = scrollView.contentSize.height
             scrollViewWidth.constant = scrollView.contentSize.width
